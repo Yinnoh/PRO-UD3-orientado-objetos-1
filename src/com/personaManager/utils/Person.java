@@ -74,8 +74,10 @@ public class Person {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public long calculateAge(){
+    public Long showAge(){
+        return calculateAge();
+    }
+    private long calculateAge(){
         LocalDate actualTime = LocalDate.now();
         return ChronoUnit.YEARS.between(this.birthDate, actualTime);
     }

@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         Person jose = new Person("jose", "Soto", "79410692H");
-        jose.setBirthDate(LocalDate.of(1998,03,16));
+        jose.setBirthDate(LocalDate.of(1998,01,25));
         jose.setEmail("jose@jose.com");
         jose.setDni("79410692H");
         System.out.println("------------ INFORMACION DE USUSARIO ------------");
@@ -18,7 +18,7 @@ public class Main {
         System.out.println("Tu email es: " + jose.getEmail());
         System.out.println("Tu nombre es:" + jose.getName());
         System.out.println("Tu apellido es: "+jose.getSurName());
-        System.out.println("Tu edad es: " +jose.calculateAge());
+        System.out.println("Tu edad es: " +jose.showAge());
         System.out.println("------------ INFORMACION DE USUSARIO ------------");
 
     }
