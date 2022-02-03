@@ -3,6 +3,8 @@ package com.personaManager.utils;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Person {
@@ -19,9 +21,7 @@ public class Person {
     public Person(String name, String surName, String dni) {
         this.name = name;
         this.surName = surName;
-        if (dni.length()!= 9 ){
-            throw new RuntimeException("The DNI length is neither too short or too big");
-        }else{
+        if (validateDni(dni)){
             this.dni = dni;
         }
 
@@ -48,14 +48,9 @@ public class Person {
     }
 
     public void setDni(String dni) {
-        if (dni.length() != 9){
-            throw new RuntimeException("The DNI length is neither too short or too big");
-        }else{
-            if (validateDni(dni)){
-               this.dni = dni;
-            }else{
-                throw new RuntimeException("The dni is invalid please insert a valid one");
-            }
+        boolean validateValue = validateDni(dni);
+        if (validateValue){
+            this.dni = dni;
         }
     }
 
@@ -74,22 +69,32 @@ public class Person {
     public void setEmail(String email) {
         this.email = email;
     }
+
     public Long showAge(){
         return calculateAge();
     }
+
     private long calculateAge(){
         LocalDate actualTime = LocalDate.now();
         return ChronoUnit.YEARS.between(this.birthDate, actualTime);
     }
 
     private boolean validateDni(String dni){
-        if (dni.length() > 9 || dni.length()<9){
-            throw new RuntimeException("The DNI length is neither too short or too big");
-        }else{
+        Pattern validateDniPatter = Pattern.compile("^[0-9]{8,8}[a-zA-Z]$");
+        Matcher validateDniMatcher = validateDniPatter.matcher(dni);
+        boolean validateDniBoolean = validateDniMatcher.find();
+        System.out.println(validateDniBoolean);
+        if(!validateDniBoolean){
+            throw new RuntimeException("The DNI length is neither too short or too big, or has a invalid format");
+        }
             int passedDniToInt = Integer.parseInt(dni.substring(0,8));
             String dniLetter = getDniLetter(passedDniToInt);
-            return dniLetter.equals(dni.substring(8,9))? true: false;
-        }
+           if(dniLetter.equals(dni.substring(8,9))){
+               return true;
+           }else {
+               throw new RuntimeException("Please insert a valid DNI");
+           }
+
     }
 
     private String getDniLetter(int dniNumber){
