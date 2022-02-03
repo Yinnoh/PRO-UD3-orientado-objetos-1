@@ -1,7 +1,6 @@
 package com.personaManager.utils;
 
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -87,13 +86,15 @@ public class Person {
         if(!validateDniBoolean){
             throw new RuntimeException("The DNI length is neither too short or too big, or has a invalid format");
         }
-            int passedDniToInt = Integer.parseInt(dni.substring(0,8));
-            String dniLetter = getDniLetter(passedDniToInt);
-           if(dniLetter.equals(dni.substring(8,9))){
-               return true;
-           }else {
-               throw new RuntimeException("Please insert a valid DNI");
-           }
+
+        int passedDniToInt = Integer.parseInt(dni.substring(0,8));
+        String dniLetter = getDniLetter(passedDniToInt);
+
+       if(dniLetter.equals(dni.substring(8,9))){
+           return true;
+       }else {
+           throw new RuntimeException("Please insert a valid DNI");
+       }
 
     }
 

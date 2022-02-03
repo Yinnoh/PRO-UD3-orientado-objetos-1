@@ -11,7 +11,7 @@ public class Main {
         Person jose = new Person("jose", "Soto", "79410692H");
         jose.setBirthDate(LocalDate.of(1998,01,25));
         jose.setEmail("jose@jose.com");
-        jose.setDni("79410692H");
+        jose.setDni("79410693H");
 
         printpersonInformation(jose);
 
